@@ -1,13 +1,13 @@
 <template>
-  
+  <router-view />
 </template>
 
-<script>
-export default {
-
-}
+<script setup>
+import { onMounted } from 'vue';
+onMounted(() => {
+  console.log('App mounted');
+});
 </script>
 
-<style>
-
+<style scoped>
 </style>
