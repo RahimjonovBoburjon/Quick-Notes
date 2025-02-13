@@ -2,12 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "FIREBASE_API_KEY",
-    authDomain: "FIREBASE_AUTH_DOMAIN",
-    projectId: "FIREBASE_PROJECT_ID",
-    storageBucket: "FIREBASE_STORAGE_BUCKET",
-    messagingSenderId: "FIREBASE_SENDER_ID",
-    appId: "FIREBASE_APP_ID"
+    apiKey: "AIzaSyD5oczDbQfg-E3itL8eqrffg8h5FsUyrkA",
+    authDomain: "quick-notes-2c941.firebaseapp.com",
+    projectId: "quick-notes-2c941",
+    storageBucket: "quick-notes-2c941.firebasestorage.app",
+    messagingSenderId: "305627299202",
+    appId: "1:305627299202:web:64d9751922a93dcc82639b",
+    measurementId: "G-QXCH7QBYMC"
 };
 
 const app = initializeApp(firebaseConfig);
