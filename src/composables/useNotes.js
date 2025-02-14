@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { db } from '../firebaseConfig';
+import { db } from '../firebase.js';
 import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy } from 'firebase/firestore';
 
 const useNotes = () => {

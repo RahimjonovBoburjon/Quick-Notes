@@ -7,6 +7,7 @@
             <button @click="login" class="bg-blue-500 text-white w-full py-2 rounded hover:bg-blue-600">
                 Login
             </button>
+            <p v-if="errorMessage" class="text-red-500 mt-2">{{ errorMessage }}</p>
         </div>
     </div>
 </template>
@@ -16,14 +17,16 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const password = ref('');
+const errorMessage = ref('');
 const router = useRouter();
 
 const login = () => {
     const savedPassword = localStorage.getItem('password');
-    if (savedPassword === password.value) {
-        router.push('/notes');
+    if (savedPassword === String(password.value)) {
+        localStorage.setItem('isAuthenticated', 'true');
+        router.push('/');
     } else {
-        alert('Invalid Password');
+        errorMessage.value = 'Invalid Password';
     }
 };
 </script>
