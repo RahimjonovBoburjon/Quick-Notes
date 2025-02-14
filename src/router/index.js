@@ -13,15 +13,12 @@ const routes = [
             const password = localStorage.getItem('password');
             const isAuthenticated = localStorage.getItem('isAuthenticated');
 
-            // Agar register qilinmagan bo'lsa, Register sahifasiga o'tkazamiz
             if (!username || !password) {
                 next('/register');
             }
-            // Agar register bo'lgan bo'lsa va hali login qilinmagan bo'lsa, Login sahifasiga o'tkazamiz
             else if (username && password && !isAuthenticated) {
                 next('/login');
             }
-            // Aks holda, Notes sahifasiga o'tkazamiz
             else {
                 next();
             }
