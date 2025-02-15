@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import Notes from '../views/Notes.vue';
+import NotFound from '../views/404.vue';
 
 const routes = [
     {
@@ -60,8 +61,12 @@ const routes = [
         path: '/enter-password',
         name: 'EnterPassword',
         component: () => import('../views/EnterPassword.vue')
+    },
+    {
+        path: '/:catchAll(.*)',
+        name: 'NotFound',
+        component: NotFound
     }
-
 ];
 
 const router = createRouter({

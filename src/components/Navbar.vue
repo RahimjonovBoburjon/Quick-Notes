@@ -27,31 +27,13 @@ const username = ref('');
 
 onMounted(() => {
     username.value = localStorage.getItem('username') || '';
+    if (localStorage.getItem('isLocked') === 'true') {
+        router.push('/enter-password');
+    }
 });
 
 const blockSite = () => {
-    const pin = localStorage.getItem('lockPin');
-    if (!pin) {
-        const newPin = prompt('Set a 6-digit PIN:');
-        if (newPin && newPin.length === 6 && /^\d+$/.test(newPin)) {
-            localStorage.setItem('lockPin', newPin);
-            alert('PIN set successfully! Site is now locked.');
-            router.push('/enter-password');
-        } else {
-            alert('Invalid PIN! It must be 6 digits.');
-        }
-    } else {
-        router.push('/enter-password');
-    }
+    localStorage.setItem('isLocked', 'true');
+    router.push('/enter-password');
 };
 </script>
-
-<style scoped>
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-}
-</style>

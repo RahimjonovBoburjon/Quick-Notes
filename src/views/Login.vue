@@ -75,6 +75,7 @@ const login = () => {
         if (savedEmail === email.value.trim() && savedPassword === password.value.trim()) {
             localStorage.setItem('isAuthenticated', 'true');
             router.push('/'); // Asosiy sahifaga yo'naltiramiz
+            location.reload()
         } else {
             errorMessage.value = 'Invalid email or password!';
         }
