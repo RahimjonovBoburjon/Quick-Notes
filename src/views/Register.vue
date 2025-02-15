@@ -3,22 +3,31 @@
         <div
             class="bg-white bg-opacity-80 backdrop-blur-md p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-200">
             <h2 class="text-3xl font-bold mb-6 text-center text-gray-800 drop-shadow-sm">Create Account</h2>
-            <p v-if="errorMessage" class="text-red-500 text-sm text-center mb-4">{{ errorMessage }}</p>
+            <transition name="fade">
+                <p v-if="errorMessage" class="text-red-500 text-sm text-center mb-4">{{ errorMessage }}</p>
+            </transition>
 
             <div class="mb-6">
                 <input type="text" v-model="username" placeholder="Enter Username"
-                    class="w-full p-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-xl border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                    class="w-full p-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-xl border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    autocomplete="off" />
             </div>
 
             <div class="mb-6">
                 <input type="email" v-model="email" placeholder="Enter Email"
-                    class="w-full p-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-xl border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" />
+                    class="w-full p-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-xl border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    autocomplete="username" />
             </div>
 
-            <div class="mb-6">
-                <input type="password" v-model="password" placeholder="Enter 6-Digit Password"
-                    class="w-full p-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-xl border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    @input="password = password.replace(/[^0-9]/g, '')" maxlength="6" />
+            <div class="mb-6 relative">
+                <input :type="showPassword ? 'text' : 'password'" v-model="password"
+                    placeholder="Enter 6-Digit Password"
+                    class="w-full p-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-xl border border-gray-300 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all pr-12"
+                    @input="password = password.replace(/[^0-9]/g, '')" maxlength="6" autocomplete="new-password" />
+                <button @click="togglePasswordVisibility"
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                    {{ showPassword ? '🙈' : '👁️' }}
+                </button>
             </div>
 
             <button @click="register" :disabled="isLoading"
@@ -48,37 +57,51 @@ const email = ref('');
 const password = ref('');
 const errorMessage = ref('');
 const isLoading = ref(false);
+const showPassword = ref(false);
 const router = useRouter();
 
 const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
 };
 
-const register = () => {
+const togglePasswordVisibility = () => {
+    showPassword.value = !showPassword.value;
+};
+
+const showError = (message) => {
+    errorMessage.value = message;
+    setTimeout(() => {
+        errorMessage.value = '';
+    }, 3000);
+};
+
+const register = async () => {
     errorMessage.value = '';
 
     if (!username.value.trim()) {
-        errorMessage.value = 'Username is required!';
+        showError('Username is required!');
         return;
     }
     if (!validateEmail(email.value.trim())) {
-        errorMessage.value = 'Please enter a valid email!';
+        showError('Please enter a valid email!');
         return;
     }
     if (password.value.trim().length !== 6) {
-        errorMessage.value = 'Password must be 6 digits!';
+        showError('Password must be 6 digits!');
         return;
     }
 
     isLoading.value = true;
 
-    setTimeout(() => {
-        localStorage.setItem('username', username.value.trim());
-        localStorage.setItem('email', email.value.trim());
-        localStorage.setItem('password', password.value.trim());
-        router.push('/login');
-        isLoading.value = false;
-    }, 2000);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    localStorage.setItem('username', username.value.trim());
+
+    localStorage.setItem('email', email.value.trim());
+    localStorage.setItem('password', password.value.trim());
+
+    isLoading.value = false;
+    router.push('/login');
 };
 </script>
 
@@ -97,5 +120,15 @@ const register = () => {
 
 div.bg-white {
     animation: fadeIn 0.8s ease-out;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 </style>

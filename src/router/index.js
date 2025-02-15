@@ -55,7 +55,13 @@ const routes = [
                 next('/register');
             }
         }
+    },
+    {
+        path: '/enter-password',
+        name: 'EnterPassword',
+        component: () => import('../views/EnterPassword.vue')
     }
+
 ];
 
 const router = createRouter({
