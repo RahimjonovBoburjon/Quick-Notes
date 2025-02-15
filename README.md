@@ -1,5 +1,28 @@
-# Vue 3 + Vite
+# QuickNotes
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+`QuickNotes` - bu Vue.js va Firebase yordamida yaratilgan onlayn kundalik yoki shaxsiy jurnal bo'lib, har bir foydalanuvchi o'z yozuvlarini maxfiy saqlashi va boshqarishi mumkin.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Funktsiyalar
+
+- **Ro'yxatdan o'tish va Kirish:** Email va parol yordamida foydalanuvchini autentifikatsiya qilish.
+- **Shaxsiy Yozuvlar:** Har bir foydalanuvchi faqat o'z yozuvlarini ko'radi.
+- **Maxfiylik:** Firebase Firestore ma'lumotlar bazasida foydalanuvchi ma'lumotlari xavfsiz saqlanadi.
+
+## Texnologiyalar
+
+- **Vue.js 3** - UI yaratish uchun.
+- **Firebase Firestore** - Ma'lumotlarni saqlash uchun.
+- **Firebase Authentication** - Foydalanuvchilarni autentifikatsiya qilish uchun.
+
+## Loyihani Ishga Tushirish
+
+### 1. Talablar
+- Node.js o'rnatilgan bo'lishi kerak.
+- Firebase loyihasi yaratilgan bo'lishi kerak.
+
+### 2. Klonlash va O'rnatish
+
+```bash
+git clone https://github.com/username/quicknotes.git
+cd quicknotes
+npm install
