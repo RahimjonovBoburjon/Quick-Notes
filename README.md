@@ -1,28 +1,59 @@
 # QuickNotes
 
-`QuickNotes` - bu Vue.js va Firebase yordamida yaratilgan onlayn kundalik yoki shaxsiy jurnal bo'lib, har bir foydalanuvchi o'z yozuvlarini maxfiy saqlashi va boshqarishi mumkin.
+QuickNotes is an online diary or personal journal built with Vue.js and Firebase. It allows each user to securely store and manage their notes privately.
 
-## Funktsiyalar
+## Features
 
-- **Ro'yxatdan o'tish va Kirish:** Email va parol yordamida foydalanuvchini autentifikatsiya qilish.
-- **Shaxsiy Yozuvlar:** Har bir foydalanuvchi faqat o'z yozuvlarini ko'radi.
-- **Maxfiylik:** Firebase Firestore ma'lumotlar bazasida foydalanuvchi ma'lumotlari xavfsiz saqlanadi.
+- **Sign Up and Login:** User authentication using email and password.
+- **Private Notes:** Each user can only see their own notes.
+- **Privacy and Security:** User data is securely stored in Firebase Firestore.
 
-## Texnologiyalar
+## Technologies Used
 
-- **Vue.js 3** - UI yaratish uchun.
-- **Firebase Firestore** - Ma'lumotlarni saqlash uchun.
-- **Firebase Authentication** - Foydalanuvchilarni autentifikatsiya qilish uchun.
+- **Vue.js 3** - For building the user interface.
+- **Vite** - For fast development and building.
+- **Tailwind CSS** - For styling.
+- **Firebase Firestore** - For data storage.
+- **Firebase Authentication** - For user authentication.
 
-## Loyihani Ishga Tushirish
+## Getting Started
 
-### 1. Talablar
-- Node.js o'rnatilgan bo'lishi kerak.
-- Firebase loyihasi yaratilgan bo'lishi kerak.
+### Prerequisites
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- [Firebase Account](https://firebase.google.com/) and a new project set up
 
-### 2. Klonlash va O'rnatish
+### Installation
+
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/username/quicknotes.git
+    cd quicknotes
+    ```
+
+2. **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3. **Firebase Setup:**
+    - Go to the [Firebase Console](https://console.firebase.google.com/) and create a new project.
+    - Enable **Firestore Database** and **Authentication (Email/Password)**.
+    - Create a new web app in your Firebase project to get your config keys.
+
+4. **Environment Variables:**
+    - Create a `.env` file in the root of your project.
+    - Add your Firebase configuration details:
+      ```env
+      VITE_API_KEY=your_api_key
+      VITE_AUTH_DOMAIN=your_auth_domain
+      VITE_PROJECT_ID=your_project_id
+      VITE_STORAGE_BUCKET=your_storage_bucket
+      VITE_MESSAGING_SENDER_ID=your_messaging_sender_id
+      VITE_APP_ID=your_app_id
+      ```
+
+### Running the Project
 
 ```bash
-git clone https://github.com/username/quicknotes.git
-cd quicknotes
-npm install
+npm run dev

@@ -58,11 +58,6 @@ const routes = [
         }
     },
     {
-        path: '/enter-password',
-        name: 'EnterPassword',
-        component: () => import('../views/EnterPassword.vue')
-    },
-    {
         path: '/:catchAll(.*)',
         name: 'NotFound',
         component: NotFound

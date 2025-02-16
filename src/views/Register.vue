@@ -51,6 +51,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { auth } from '../firebase.js';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 const username = ref('');
 const email = ref('');
@@ -93,42 +95,25 @@ const register = async () => {
 
     isLoading.value = true;
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+        const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email.value.trim(),
+            password.value.trim()
+        );
+        await updateProfile(userCredential.user, {
+            displayName: username.value.trim(),
+        });
 
-    localStorage.setItem('username', username.value.trim());
+        localStorage.setItem('username', username.value.trim());
+        localStorage.setItem('email', email.value.trim());
 
-    localStorage.setItem('email', email.value.trim());
-    localStorage.setItem('password', password.value.trim());
-
-    isLoading.value = false;
-    router.push('/login');
+        isLoading.value = false;
+        router.push('/login');
+    } catch (error) {
+        console.error('Error during registration:', error);
+        showError(error.message);
+        isLoading.value = false;
+    }
 };
 </script>
-
-<style scoped>
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-div.bg-white {
-    animation: fadeIn 0.8s ease-out;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-</style>
